@@ -1,0 +1,99 @@
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+    
+{{/each}}
+
+<h2 class="text-center">Gestão de Estoque</h2>  
+<form action="/registrado" method="POST" class="form-control">
+    <h4  class="text-center mt-4">Faça o Registro</h4>
+    <div class="row g-3 mb-3 mt-3">
+        <div class="col-sm">
+            <label for="cnpj" class="form-label">CNPJ: </label>
+            <input type="text" name="cnpj" id="cnpj" maxlength="20" minlength="12" class="form-control" placeholder="Digite seu CNPJ" required>
+        </div>
+        <div class="col-sm">
+            <label for="senha" class="form-label">Senha: </label>
+            <input type="password" name="senha" id="" class="form-control" placeholder="Digite sua Senha" required>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="email" class="form-label">Email: </label>
+            <input type="text" name="email" id="email" class="form-control" placeholder="Digite seu Email" required>
+        </div>
+        <div class="col-sm">
+            <label for="telefone" class="form-label">Telefone: </label>
+            <input type="phone" name="telefone" id="telefone" class="form-control" placeholder="Digite seu Telefone" required>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="cep" class="form-label">CEP: </label>
+            <input type="text" name="cep" id="cep" class="form-control" placeholder="Digite seu CEP" required>
+        </div>
+        <div class="col-sm">
+            <label for=""></label>
+            <button type="button" id="buscarCep" class="btn btn-info form-control mt-2">Buscar CEP</button>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="endereco" class="form-label">Endereço: </label>
+            <input type="text" name="endereco" id="endereco" readonly class="form-control" placeholder="Digite seu Endereço" required>
+        </div>
+        <div class="col-sm">
+            <label for="ncasa" class="form-label">N°: </label>
+            <input type="text" name="ncasa" id="ncasa" class="form-control" placeholder="Digite seu Numero" required>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="bairro" class="form-label">Bairro: </label>
+            <input type="text" name="bairro" id="bairro" readonly class="form-control" placeholder="Digite seu Bairro" required>
+        </div>
+        <div class="col-sm">
+            <label for="cidade" class="form-label">Cidade: </label>
+            <input type="text" name="cidade" id="cidade" readonly class="form-control" placeholder="Digite seu Cidade" required>
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="estado" class="form-label">Estado: </label>
+            <input type="text" name="estado" id="estado" readonly class="form-control" placeholder="Digite seu Estado" required>
+        </div>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success btn-lg mt-4">Registrar</button>
+        <a href="/" class="btn btn-danger btn-lg mb-4">Sair</a>
+    </div>
+</form>
+
+<script>
+    // Função para buscar o CEP
+    document.getElementById('buscarCep').addEventListener('click', function () {
+        const cep = document.getElementById('cep').value.replace('-', '');
+        if (cep.length === 8) {
+            fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.erro) {
+                        document.getElementById('endereco').value = data.logradouro;
+                        document.getElementById('bairro').value = data.bairro;
+                        document.getElementById('cidade').value = data.localidade;
+                        document.getElementById('estado').value = data.uf;
+                    } else {
+                        alert('CEP não encontrado.');
+                    }
+                })
+                .catch(() => alert('Erro ao buscar CEP.'));
+        } else {
+            alert('CEP inválido.');
+        }
+    });
+</script>

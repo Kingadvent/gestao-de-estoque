@@ -1,0 +1,69 @@
+{{#each erros}}
+<div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+
+<form action="/fornecedor/cadastrarFornecedor" method="POST" class="form-control">
+    <h1 class="mt-4 mb-4">Cadastro de Fornecedor</h1>
+
+    <div class="row g-3 mb-3">
+
+        <div class="col-sm">
+            <label for="Nome" class="form-label">Nome:</label>
+            <input type="text" name="Nome" id="Nome" min="0" class="form-control">
+        </div>
+
+        <div class="col-sm">
+            <label for="Telefone" class="form-label">Telefone:</label>
+            <input type="number" name="Telefone" id="Telefone" step="0.01" min="0" class="form-control">
+        </div>
+
+        <div class="col-sm">
+            <label for="cnpj" class="form-label">CNPJ:</label>
+            <input type="number" name="cnpj" id="cnpj" step="0.01" min="0" class="form-control">
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input type="text" name="endereco" id="endereco" class="form-control">
+        </div>
+        <div class="col-sm">
+            <label for="email" class="form-label">E-mail:</label>
+            <input type="text" name="email" id="email" class="form-control">
+        </div>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Cadastrar Fornecedor</button>
+    </div>
+</form>
+
+<br><br>
+
+
+<h3>Fornecedores Cadastrados:</h3>
+<table class="table-responsive table-striped table-bordered table table-mg caption-top">
+    <thead>
+        <tr class="p-2">
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>CNPJ</th>
+            <th>Endereço</th>
+            <th>E-mail</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {{#each fornecedores}}
+            <tr>
+                <td>{{Nome}}</td>
+                <td>{{Telefone}}</td>
+                <td>{{CNPJ}}</td>
+                <td>{{Endereco}}</td>
+                <td>{{Email}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

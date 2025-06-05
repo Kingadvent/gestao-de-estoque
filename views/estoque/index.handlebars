@@ -1,0 +1,90 @@
+<form action="/estoque/cadastrarproduto" method="POST" class="form-control">
+    <h1  class="mt-4 mb-4">Cadastro de Produtos</h1>
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" name="nome" id="nome" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição:</label>
+        <textarea type="text" name="descricao" id="descricao" class="form-control" rows="4" cols="50"></textarea>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="categorias" class="form-label">Categoria:</label>
+            <select id="categorias" name="categorias" class="form-select" aria-label="Default select example">
+                {{#categoria}}  
+                    <option value="{{CategoriaID}}">{{CategoriaID}} - {{Nome}}</option>
+                {{/categoria}}
+            </select>
+        </div>
+
+        <div class="col-sm">
+            <label for="quantidade" class="form-label">Quantidade em Estoque:</label>
+            <input type="number" name="quantidade" id="quantidade" min="0" class="form-control">
+        </div>
+
+        <div class="col-sm">
+            <label for="preco" class="form-label">Preço Unitário:</label>
+            <input type="text" name="preco" id="preco" step="0.01" min="0" class="form-control">
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="dataDeFabricacao" class="form-label">Data de Fabricação:</label>
+            <input type="date" name="dataDeFabricacao" id="dataDeFabricacao" class="form-control">
+        </div>
+        <div class="col-sm">
+            <label for="dataDeValidade" class="form-label">Data de Validade:</label>
+            <input type="date" name="dataDeValidade" id="dataDeValidade" class="form-control">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="fornecedors" class="form-label">Fornecedor:</label>
+        <select id="fornecedors" name="fornecedors" class="form-select" aria-label="Default select example">
+            {{#fornecedor}}  
+                <option value="{{FornecedorID}}">{{FornecedorID}} - {{Nome}} - {{Email}}</option>
+            {{/fornecedor}}
+        </select>
+    </div>
+    
+
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Cadastrar Produto</button>
+    </div>
+</form>
+
+<br><br>
+
+
+<h3>Produtos Cadastrados:</h3>
+<table class="table-responsive table-bordered table-striped table table-mg caption-top">
+    <thead>
+        <tr class="p-2">
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Quantidade em Estoque</th>
+            <th>Preço Unitário</th>
+            <th>Data de Fabricação</th>
+            <th>Data de Validade</th>
+            <th>Código de Barras</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {{#each produtos}}
+            <tr class="mt-2">
+                <td>{{Nome}}</td>
+                <td>{{CategoriaID}}</td>
+                <td>{{QuantidadeEmEstoque}}</td>
+                <td>R$ {{Preco}}</td>
+                <td>{{Fabricacao}}</td>
+                <td>{{Validade}}</td>
+                <td>{{codico}}</td>
+
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

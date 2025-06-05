@@ -1,0 +1,39 @@
+<form action="/categoria/cadastrar" method="POST" class="form-control">
+    <h1  class="mt-4 mb-4">Cadastro de Categoria</h1>
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input type="text" name="nome" id="nome" class="form-control">
+    </div>
+
+    <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição:</label>
+        <textarea type="text" name="descricao" id="descricao" class="form-control" rows="4" cols="50"></textarea>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Cadastrar Categoria</button>
+    </div>
+</form>
+
+<br><br>
+
+
+<h3>Categorias Cadastrados:</h3>
+<table class="table-responsive table-bordered table-striped table table-mg caption-top">
+    <thead>
+        <tr class="p-2">
+            <th>Numero</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {{#each categorias}}
+            <tr class="mt-2">
+                <td>{{CategoriaID}}</td>
+                <td>{{Nome}}</td>
+                <td>{{Descricao}}</td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>

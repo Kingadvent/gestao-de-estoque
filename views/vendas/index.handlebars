@@ -1,0 +1,103 @@
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+    
+{{/each}}
+<form action="/vendas/venderproduto" method="POST" class="form-control">
+    <h1  class="mt-4 mb-4">Realizar Venda</h1>
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="codicoDeBarras" class="form-label">Código do Produto:</label>
+            <input type="text" name="codicoDeBarras" id="codicoDeBarras" class="form-control">
+        </div>
+        <div class="col-sm">
+            <label for="quantidade" class="form-label">Quantidade:</label>
+            <input type="number" name="quantidade" min="0" step="1" value="1" id="quantidade" class="form-control">
+        </div>
+        <div class="col-sm">
+            <label for=""></label>
+            <button type="button" id="calcular" class="btn btn-info form-control mt-2">Calcular</button>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="preco" class="form-label">Preço Unitário:</label>
+            <input type="text" name="preco" id="preco" readonly class="form-control">
+        </div>
+        <div class="col-sm">
+            <label for="estoque" class="form-label">Quantidade em Estoque:</label>
+            <input type="text" name="estoque" id="estoque" readonly class="form-control">
+        </div>
+    </div>
+    <div class="row g-3 mb-3">
+        <div class="col-sm">
+            <label for="nproduto" class="form-label">Produto:</label>
+            <input type="text" name="nproduto" id="nproduto" readonly class="form-control">
+        </div>
+        <div class="col-sm">
+            <label for="totalAdicionado" class="form-label">Valor Total a Adicionar:</label>
+            <input type="text" name="totalAdicionado" id="totalAdicionado"="0" class="form-control">
+        </div>
+    </div>
+
+    <p class="">
+        <button type="submit" style="width: 49%;" class="btn btn-primary">Vender Produto</button>
+        <a href="/" style="width: 49%;" class="btn btn-danger">Cancelar</a>
+    </p >
+</form>
+
+<br><br>
+
+<h3>Produtos Vendidos:</h3>
+<table class="table-responsive table-bordered table-striped table table-mg caption-top">
+    <thead>
+        <tr class="p-2">
+            <th>Código do Produto</th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {{#each historicos}}
+                <tr>
+                    <td>{{codico}}</td>
+                    <td>{{Nome}}</td>
+                    <td>{{Quantidade}}</td>
+                    <td>R$ {{Preco}}</td>
+                </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+<script>
+    function formatarMoeda(valor) {
+        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+    const produtos = [
+        {{#each produtos}}
+            {
+                codico: "{{codico}}",
+                preco: {{Preco}},
+                estoque: {{QuantidadeEmEstoque}},
+                nome: "{{Nome}}",
+            }{{#unless @last}},{{/unless}}
+        {{/each}}
+    ];
+    document.getElementById('calcular').addEventListener('click', function () {
+        const codico = document.getElementById('codicoDeBarras').value;
+        const quantidade = parseInt(document.getElementById('quantidade').value);
+        const produto = produtos.find(p => p.codico === codico);
+        if (produto) {
+            const preco = produto.preco;
+            const total = preco * quantidade;
+
+            document.getElementById('preco').value = formatarMoeda(preco);
+            document.getElementById('estoque').value = produto.estoque;
+            document.getElementById('nproduto').value = produto.nome;
+
+            document.getElementById('totalAdicionado').value = formatarMoeda(total);    
+        }
+    });
+</script>

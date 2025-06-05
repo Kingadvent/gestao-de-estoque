@@ -1,0 +1,77 @@
+
+<h1>Painel do Gerenciamento:</h1>
+<p class="form-text text-black">Painel de Controles:</p>
+<hr>
+<div class="row">
+    <div class="col-md-3 col-sm-2">
+        <a href="limpars/historico" class="btn btn-danger btn-lg" style="width: 70%;">Limpar Relatorios</a>
+    </div>
+    <div class="col-md-3 col-sm-2">
+        <a href="limpars/produto" class="btn btn-warning btn-lg" style="width: 70%;">Limpar Produtos</a>
+    </div>
+    <div class="col-md-3 col-sm-2">
+        <a href="limpars/categoria" class="btn btn-info btn-lg" style="width: 70%;">Limpar Categorias</a>
+    </div>
+    <div class="col-md-3 col-sm-2">
+        <a href="limpars/fornecedor" class="btn btn-primary btn-lg" style="width: 70%;">Limpar Fornecedores</a>
+    </div>
+</div>
+<br>
+<p class="form-text text-black">Usuarios:</p>
+<hr>
+
+{{#each usuario}}
+<div class="card">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="ms-3 col-auto mb-3">
+                <label for="nome" class="form-label">CNPJ:</label>
+                <input type="text" name="nome" id="" value="{{CNPJ}}" class="form-control" disabled readonly>
+            </div>
+            <div class="ms-3 col-sm-3 col-auto mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" name="email" id="" value="{{Email}}" class="form-control" disabled readonly>
+            </div>
+            <div class="ms-3 col-auto mb-3">
+                <label for="user" class="form-label">Telefone:</label>
+                <input type="text" name="user" id="" value="{{Telefone}}" class="form-control" disabled readonly>
+            </div>
+            <div class="ms-3 col-auto mb-3">
+                <label for="user" class="form-label">CEP:</label>
+                <input type="text" name="user" id="" value="{{CEP}} | Nº {{Casa}}" class="form-control" disabled readonly>
+            </div>
+            <div class="ms-3 col-auto mb-3">
+                <label for="grupo" class="form-label">Vendedor:</label><br>
+                
+                {{#if (eq Permissao 1)}}
+                    <a class="btn btn-success" href="setgrupo/{{UsuarioID}}/1">SIM</a>
+                {{else}}
+                    <a class="btn btn-danger" href="setgrupo/{{UsuarioID}}/1">NÃO</a>
+                {{/if}}
+            </div>
+            <div class="ms-3 col-auto mb-3">
+                <label for="grupo" class="form-label">Gerente:</label><br>
+                {{#if (eq Permissao 2)}}
+                    <a class="btn btn-success" href="setgrupo/{{UsuarioID}}/2">SIM</a>
+                {{else}}
+                    <a class="btn btn-danger" href="setgrupo/{{UsuarioID}}/2">NÃO</a>
+                {{/if}}
+            </div>
+            <div class="ms-3 col-auto mb-3">
+                <label for="grupo" class="form-label">Dono:</label><br>
+                {{#if (eq Permissao 3)}}
+                    <a class="btn btn-success" href="setgrupo/{{UsuarioID}}/3">SIM</a>
+                {{else}}
+                    <a class="btn btn-danger" href="setgrupo/{{UsuarioID}}/3">NÃO</a>
+                {{/if}}
+            </div>
+            <div class="ms-3 col-auto mb-3">
+                <label for="grupo" class="form-label">Deletar:</label><br>
+                <a class="btn btn-warning" href="removeuser/{{UsuarioID}}"><i class="bi bi-x-circle"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+{{else}}
+<h2>Sem Usuario Cadastrado!</h2>
+{{/each}}

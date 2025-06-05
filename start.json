@@ -1,0 +1,19 @@
+{
+    "apps": {
+        "script": "/home/gesta4693/applications/gestao_estoque/app.js",
+        "name": "gestao_estoque",
+        "max_memory_restart": "256M",
+        "exec_mode": "fork",
+        "ignore_watch": "[\"[\\/\\]\\./\", \"node_modules\"]",
+        "watch": false,
+        "log_date_format": "YYYY-MM-DD HH:mm Z",
+        "out_file": "/home/gesta4693/applications/gestao_estoque/stdout.log",
+        "error_file": "/home/gesta4693/applications/gestao_estoque/stdout.log",
+        "pid_file": "/home/gesta4693/applications/gestao_estoque/pid.pid",
+        "interpreter": "/usr/nodejs/node-v22.2.0/bin/node",
+        "env": {
+            "NODE_ENV": "production",
+            "PORT": "58433"
+        }
+    }
+}

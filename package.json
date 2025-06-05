@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "connect-flash": "^0.1.1",
+    "cookie-session": "^2.1.0",
+    "express": "^4.21.1",
+    "express-handlebars": "^8.0.1",
+    "fs": "^0.0.1-security",
+    "mysql2": "^3.11.3",
+    "nodemailer": "^6.9.16",
+    "nodemon": "^3.1.7",
+    "passport": "^0.5.3",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sequelize": "^6.37.5"
+  },
+  "name": "gestao_estoque",
+  "version": "1.1.0",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon .",
+    "start": "node ."
+  },
+  "author": "Gestao equipe",
+  "license": "ISC",
+  "description": "Sistema de Gestao de Estoque",
+  "devDependencies": {}
+}

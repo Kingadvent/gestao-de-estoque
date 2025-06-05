@@ -1,0 +1,36 @@
+{{#if user}}
+    <h1>Bem-vindo à Home</h1>
+    <p>Conteúdo da página inicial.</p>
+
+    <div class="card mb-3">
+          
+        <div class="card-body">
+            <img class="card-img w-50" src="https://www.laboneconsultoria.com.br/wp-content/uploads/2021/09/Gest%C3%A3o-de-estoque-Saiba-o-que-%C3%A9-e-como-implementar.jpg" alt="Card image cap">
+            <h2>Gestão de Estoque</h2>
+        </div>
+    </div>
+{{else}}
+
+<h2 class="text-center">Gestão de Estoque</h2>
+<form action="/login" method="POST" class="form-control">
+    <h4  class="text-center">Faça o Login</h4>
+    <div class="mb-3">
+        <label for="usuario" class="form-label">CNPJ: </label>
+        <input type="text" name="cnpj" id="cnpj" class="form-control" minlength="12" maxlength="20" placeholder="Digite seu CNPJ" required>
+        
+    </div>
+    <div class="mb-3">
+        <label for="senha">Senha: </label>
+        <input type="password" name="senha" id="senha" class="form-control" placeholder="Digite sua Senha" required>
+    </div>
+    <div class="mb-3">
+        <a href="/esquecisenha" class="ms-1" style="text-decoration: none;">Esqueci minha senha!</a>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success btn-lg mt-4">Login</button>
+        <a href="/registrar" class="btn btn-primary btn-lg mb-4">Registrar</a>
+    </div>
+</form>
+
+{{/if}}

@@ -1,0 +1,111 @@
+<h1>Relatório de Vendas</h1>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Vendas</h5>
+                <p class="card-text">Valor total de Vendas.</p>
+                <a href="/vendas" class="btn btn-success">{{totalvendas}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Compras</h5>
+                <p class="card-text">Valor gasto em Compras de Equipamento.</p>
+                <a href="estoque" class="btn btn-danger">{{totalcompras}}</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Total</h5>
+                <p class="card-text">Valor total Gasto.</p>
+                <a href="/relatorio" class="btn {{#if (gt total2 0)}}btn-success{{else}}btn-danger{{/if}}">{{total}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/relatorio/info" method="GET" class="form-control">
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="categorias" class="form-label col-form-label">Filtrar por Categoria:</label>
+        </div>
+        <div class="col-2">
+            <select id="categorias" name="categorias" class="form-select" aria-label="Default select example">
+                <option value="0">Sem Categoria</option>
+                {{#categoria}}  
+                    <option value="{{CategoriaID}}">{{CategoriaID}} - {{Nome}}</option>
+                {{/categoria}}
+            </select>
+        </div>
+        <div class="col-auto">
+            <label for="pesquisaFiltro" class="form-label col-form-label">Pesquisar:</label>
+        </div>
+        <div class="col-3">
+            <input type="text" name="pesquisaFiltro" id="pesquisaFiltro" class="form-control">
+        </div>
+        <div class="col-auto">
+            <button id="imprimirRelatorio" class="btn btn-success px-4">Pesquisar</a>
+        </div>
+        <div class="col-auto">
+            <a href="/relatorio" id="limparFiltros" class="btn btn-warning px-4">Limpar</a>
+        </div>
+        <div class="col-auto">
+            <a onclick="imprimirTabela()" id="imprimir" class="btn btn-success px-4">
+                <i class="bi bi-cloud-download"></i>
+            </a>
+        </div>
+    </div>
+
+</form>
+<br>
+<table id="minhaTabela" class="table-responsive table-bordered table-striped table table-mg caption-top">
+    <thead>
+        <tr class="p-2">
+            <th>Código do Produto</th>
+            <th>Nome do Produto	</th>
+            <th>Quantidade</th>
+            <th>Valor</th>
+            <th>Fornecedor</th>
+            <th>Movimentação</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {{#each historico}}
+            <tr>
+                <td>{{codico}}</td>
+                <td>{{Nome}}</td>
+                <td>{{Quantidade}}</td>
+                <td>R$ {{Preco}}</td>
+                <td>{{fornecedors}}</td>
+                <td>
+                    {{#if venda}}
+                        <i class="bi bi-arrow-up-circle"> Vendido</i>
+                    {{else}}
+                        <i class="bi bi-arrow-down-circle"> Comprado</i>
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+<script>
+    function imprimirTabela() {
+    const tabela = document.getElementById('minhaTabela');
+    const janela = window.open('', '', 'height=600,width=800');
+    janela.document.write('<html><head><title>Imprimir Tabela</title>');
+    janela.document.write('<link rel="stylesheet" href="styles.css">');
+    janela.document.write('</head><body>');
+    janela.document.write(tabela.outerHTML);
+    janela.document.write('</body></html>');
+    janela.document.close();
+    janela.print();
+}
+
+</script>

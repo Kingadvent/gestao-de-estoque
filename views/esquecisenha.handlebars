@@ -1,0 +1,22 @@
+<h2 class="text-center">Esqueci Minha Senha</h2>
+<form action="/recuperarsenha" method="POST" class="form-control">
+    <h4  class="text-center">Recuperar Senha</h4>
+    <div class="mb-3">
+        <label for="cnpj" class="form-label">CNPJ: </label>
+        <input type="text" name="cnpj" id="cnpj" class="form-control" minlength="12" maxlength="20" placeholder="Digite seu CNPJ" required>
+        
+    </div>
+    <div class="mb-3">
+        <label for="email">Email: </label>
+        <input type="text" name="email" id="email" class="form-control" placeholder="Digite seu Email" required>
+    </div>
+    <div class="mb-3">
+        <label for="senha">Nova Senha: </label>
+        <input type="password" name="senha" id="senha" class="form-control" placeholder="Digite sua nova Senha" required>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-success btn-lg mt-4">Recuperar</button>
+        <a href="/" class="btn btn-primary btn-lg mb-4">Cancelar</a>
+    </div>
+</form>

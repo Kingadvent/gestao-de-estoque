@@ -1,0 +1,81 @@
+<div class="d-flex">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar-toggle">
+        <div class="sidebar-logo">
+            <a href="/">Gestão de Estoque</a>
+        </div>
+        <!-- Sidebar Navigation -->
+        <ul class="sidebar-nav p-0">
+            <li class="sidebar-header">
+                Usuario
+            </li>
+            <li class="sidebar-item">
+                <a href="/conta" class="sidebar-link">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Conta</span>
+                </a>
+            </li>
+            <li class="sidebar-header">
+                Loja
+            </li>
+            <li class="sidebar-item">
+                <a href="/vendas" class="sidebar-link">
+                    <i class="bi bi-cart-check"></i>
+                    <span>Vendas</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/estoque" class="sidebar-link">
+                    <i class="bi bi-box2"></i>
+                    <span>Estoque</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="/categoria" class="sidebar-link">
+                    <i class="bi bi-tags"></i>
+                    <span>Categoria</span>
+                </a>
+            </li>
+            {{#if (gt user.Permissao 1)}}
+                <li class="sidebar-header">
+                    Gerenciamento
+                </li>
+                <li class="sidebar-item">
+                    <a href="/fornecedor" class="sidebar-link">
+                        <i class="bi bi-clipboard2-check"></i>
+                        <span>Fornecedor</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="/relatorio" class="sidebar-link">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>Relatorios</span>
+                    </a>
+                </li>
+                {{#if (gt user.Permissao 2)}}
+                    <li class="sidebar-item">
+                        <a href="/gerenciar" class="sidebar-link">
+                            <i class="bi bi-person-lines-fill"></i>
+                            <span>Gerenciamento</span>
+                        </a>
+                    </li>
+                {{/if}}
+            {{/if}}
+        </ul>
+    </aside>
+    <!-- Sidebar Ends -->
+    <!-- Main Component -->
+    <div class="main">
+        <button class="mt-4 ms-4 toggler-btn" type="button">
+            <i class="bi bi-list"></i>
+        </button>
+        <main class="p-3">
+            <div class="container-fluid">
+                <div class="mb-3 text-center">
+                    {{>_msg}}
+                    {{{body}}}
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
